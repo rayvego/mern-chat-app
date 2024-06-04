@@ -1,34 +1,74 @@
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import useLogin from "../../hooks/useLogin.js";
+
 export const Login = () => {
-    return (
-        <div className={"flex flex-col items-center justify-center min-w-96 mx-auto"}>
-            <div className={"w-full p-6 rounded-2xl shadow-md bg-gray-400 bg-clip-padding backdrop-blur-lg bg-opacity-0"}>
-                <h1 className={"text-3xl font-semibold text-center text-gray-50"}>
-                    Login
-                    <span className={"text-green-300"}> Chat App</span>
-                </h1>
+  const [loginCred, setLoginCred] = useState({
+    username: "",
+    password: "",
+  });
 
-                <form action="" class={"mt-5"}>
-                    <div>
-                        <label className="input input-bordered flex items-center gap-2">
-                            Username
-                            <input type="text" className="grow" placeholder="Enter Username"/>
-                        </label>
-                    </div>
+  const { loading, login } = useLogin();
 
-                    <div>
-                        <label className="input input-bordered flex items-center gap-2 mt-4 mb-4">
-                            Password
-                            <input type="password" className="grow" placeholder="Enter Password"/>
-                        </label>
-                    </div>
+  const handleChange = (evt) => {
+    setLoginCred({
+      ...loginCred,
+      [evt.target.name]: evt.target.value,
+    });
+  };
 
-                    <button className="btn btn-outline mt-2 btn-sm btn-block mb-4">Login</button>
-                    <a className="link text-green-500 link-hover">Don't Have An Account?</a>
-                </form>
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
+    await login(loginCred.username, loginCred.password);
+  };
 
-            </div>
-        </div>
-    )
-}
+  return (
+    <div className={"flex flex-col items-center justify-center min-w-96 mx-auto"}>
+      <div className={"w-full p-6 rounded-2xl shadow-md bg-gray-400 bg-clip-padding backdrop-blur-lg bg-opacity-0"}>
+        <h1 className={"text-3xl font-semibold text-center text-gray-50"}>
+          Login
+          <span className={"text-green-300"}> Chat App</span>
+        </h1>
 
-export default Login
+        <form action="" className={"mt-5"} onSubmit={handleSubmit}>
+          <div>
+            <label className="input input-bordered flex items-center gap-2">
+              Username
+              <input
+                type="text"
+                name={"username"}
+                className="grow"
+                placeholder="Enter Username"
+                value={loginCred.username}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <div>
+            <label className="input input-bordered flex items-center gap-2 mt-4 mb-4">
+              Password
+              <input
+                type="password"
+                className="grow"
+                placeholder="Enter Password"
+                name={"password"}
+                value={loginCred.password}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+          <button className="btn btn-outline mt-2 btn-sm btn-block mb-4" disabled={loading}>
+            {loading ? <span className={"loading loading-spinner"}></span> : "Login"}
+          </button>
+          <Link to={"/signup"} className="link text-green-500 link-hover">
+            Don't Have An Account?
+          </Link>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
