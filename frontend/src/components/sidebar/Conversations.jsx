@@ -7,11 +7,7 @@ export const Conversations = () => {
   return (
     <div className={"flex flex-col py-2 overflow-auto"}>
       {conversations.map((conversation, idx) => (
-        <Conversation
-          key={conversation._id}
-          conversation={conversation} // ? what is this?
-          lastIdx={idx === conversations.length - 1}
-        />
+        <Conversation key={conversation._id} conversation={conversation} lastIdx={idx === conversations.length - 1} />
       ))}
     </div>
   );

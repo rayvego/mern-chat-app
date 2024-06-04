@@ -1,0 +1,2 @@
+general tips
+- do not put toast notifications on backend... put it only on frontend
