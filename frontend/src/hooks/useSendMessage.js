@@ -10,6 +10,7 @@ export const useSendMessage = () => {
     setLoading(true);
 
     try {
+      // sends data to the sendMessage function in the backend
       const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

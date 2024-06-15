@@ -10,12 +10,13 @@ function App() {
   const { authUser } = useAuthContext();
   return (
     <div className={"p-4 h-screen flex items-center justify-center"}>
+      {/* Routing using react-router-dom */}
       <Routes>
         <Route path={"/"} element={authUser ? <Home /> : <Navigate to={"/login"} />} />
         <Route path={"/login"} element={authUser ? <Navigate to={"/"} /> : <Login />} />
         <Route path={"/signup"} element={authUser ? <Navigate to={"/"} /> : <SignUp />} />
       </Routes>
-      <Toaster />
+      <Toaster /> {/* Toaster component from react-hot-toast */}
     </div>
   );
 }

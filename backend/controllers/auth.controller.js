@@ -4,13 +4,14 @@ import generateTokenAndSetCookie from "../utils/generateTokens.js";
 
 export const signup = async (req, res) => {
   try {
-    const { username, password, fullName, confirmPassword, gender } = req.body; // expecting in json format
+    // expecting in json format from useSignup hook
+    const { username, password, fullName, confirmPassword, gender } = req.body;
     if (password !== confirmPassword) {
       // 400 stands for bad request (client's fault)
       return res.status(400).json({ error: "Passwords do not match" });
     }
 
-    // first check if the user already exists or not based on the username, so username is unique be unique
+    // first check if the user already exists or not based on the username, so username is unique
     const user = await User.findOne({ username });
 
     if (user) {
@@ -58,7 +59,7 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, password } = req.body; // expecting from the useLogin hook
     const user = await User.findOne({ username });
     // authenticating using bcrypt compare method
     const isPasswordCorrect = user && (await bcrypt.compare(password, user.password));

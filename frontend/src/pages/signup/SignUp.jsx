@@ -4,6 +4,7 @@ import { useState } from "react";
 import useSignup from "../../hooks/useSignup.js";
 
 export const SignUp = () => {
+  // state to store the input values
   const [inputs, setInputs] = useState({
     fullName: "",
     username: "",
@@ -12,6 +13,7 @@ export const SignUp = () => {
     gender: "",
   });
 
+  // function to handle form
   const handleChange = (evt) => {
     setInputs((currData) => {
       return {
@@ -21,6 +23,7 @@ export const SignUp = () => {
     });
   };
 
+  // get the signup function from the useSignup hook
   const { loading, signup } = useSignup();
 
   const handleSubmit = async (evt) => {
@@ -52,7 +55,7 @@ export const SignUp = () => {
               <input
                 type="text"
                 className="grow"
-                name={"fullName"}
+                name={"fullName"} // ! important
                 placeholder="Enter Full Name"
                 value={inputs.fullName}
                 onChange={handleChange}

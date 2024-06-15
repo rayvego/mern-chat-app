@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 
 const conversationSchema = new mongoose.Schema(
   {
-    participants: [
+    participants: [ // this is an array
       {
         // referencing
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     ],
-    messages: [
+    messages: [ // this too
       {
         // referencing
         type: mongoose.Schema.Types.ObjectId,

@@ -3,13 +3,16 @@ import { useState } from "react";
 import useLogin from "../../hooks/useLogin.js";
 
 export const Login = () => {
+  // state to store the login credentials in the form
   const [loginCred, setLoginCred] = useState({
     username: "",
     password: "",
   });
 
+  // get the loading state and login function from the useLogin hook
   const { loading, login } = useLogin();
 
+  // to handle the input change in the form
   const handleChange = (evt) => {
     setLoginCred({
       ...loginCred,
@@ -17,6 +20,7 @@ export const Login = () => {
     });
   };
 
+  // to handle the form submission, calls the login function with the required credentials
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await login(loginCred.username, loginCred.password);
@@ -36,7 +40,7 @@ export const Login = () => {
               Username
               <input
                 type="text"
-                name={"username"}
+                name={"username"} // ! important
                 className="grow"
                 placeholder="Enter Username"
                 value={loginCred.username}
@@ -52,7 +56,7 @@ export const Login = () => {
                 type="password"
                 className="grow"
                 placeholder="Enter Password"
-                name={"password"}
+                name={"password"} // ! important
                 value={loginCred.password}
                 onChange={handleChange}
               />

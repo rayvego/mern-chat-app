@@ -2,11 +2,14 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAuthContext } from "../context/AuthContext.jsx";
 
+// this function will return loading state and signup function
 export const useSignup = () => {
   const [loading, setLoading] = useState(false);
+  // using the authUser and setAuthUser from the AuthContext
   const { authUser, setAuthUser } = useAuthContext();
 
   const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
+    // check if the fields are valid
     const success = handleInputErrors({ fullName, username, password, confirmPassword, gender });
     if (!success) return;
 
@@ -15,9 +18,11 @@ export const useSignup = () => {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        // sending the data in json format to the signup auth controller
         body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
       });
 
+      // data contains full user data - _id, username, fullName, profilePicture
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);

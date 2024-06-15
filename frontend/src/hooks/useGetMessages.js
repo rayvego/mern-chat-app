@@ -11,6 +11,7 @@ export const useGetMessages = () => {
       setLoading(true);
 
       try {
+        // expects an array of messages from the getMessage controller in backend
         const res = await fetch(`/api/messages/${selectedConversation._id}`);
         const data = await res.json();
 
@@ -18,6 +19,8 @@ export const useGetMessages = () => {
           throw new Error(data.error);
         }
 
+        // ? setting messages in zustand store?
+        // ? why are we "storing" messages in store...? we have the db right?
         setMessages(data);
       } catch (error) {
         toast.error(error.message);
@@ -26,6 +29,7 @@ export const useGetMessages = () => {
       }
     };
 
+    // ? when clicked on a contact?
     if (selectedConversation?._id) {
       getMessages();
     }

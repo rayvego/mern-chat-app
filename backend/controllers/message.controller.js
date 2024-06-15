@@ -1,5 +1,6 @@
 import Conversation from "../models/conversation.model.js";
 import Message from "../models/message.model.js";
+import { getReceiverSocketId, io } from "../socket/socket.js";
 
 export const sendMessage = async (req, res) => {
   try {
@@ -46,6 +47,12 @@ export const sendMessage = async (req, res) => {
       return res.status(400).json({ error: "Message could not be sent" });
     }
 
+    // socket stuff will go here
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage); // sends event to a specific client
+    }
+
     // the useSendMessage expects a response with the following structure
     res.json({
       receiverId: receiverId,
@@ -78,6 +85,7 @@ export const getMessages = async (req, res) => {
     }
 
     // otherwise send the messages
+    // sending messages to the useGetMessages hook in the frontend
     res.status(200).json(conversation.messages);
 
     // btw, we are sending these messages to the useGetMessages hook in the frontend
