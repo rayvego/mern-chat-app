@@ -51,7 +51,11 @@ This project follows an MVC (Model-View-Controller) software design pattern, an 
 
 ## Screenshots
 
-![SCR-20240622-tzwr](https://github.com/rayvego/mern-chat-app/assets/139421927/bc278683-6195-4d88-b0e8-3938ea608701)
+<img width="1408" alt="Screenshot 2024-06-22 at 11 30 11 PM" src="https://github.com/rayvego/mern-chat-app/assets/139421927/b4cd8411-5b31-4cb3-8537-2a6228db85f6">
+
+<img width="1408" alt="Screenshot 2024-06-22 at 11 28 22 PM" src="https://github.com/rayvego/mern-chat-app/assets/139421927/fc9b0ba1-76de-40f5-8134-6359737a0d74">
+
+<img width="1408" alt="Screenshot 2024-06-22 at 11 30 02 PM" src="https://github.com/rayvego/mern-chat-app/assets/139421927/f570b5a8-8c15-42a2-bb0b-ad46dd49f721">
 
 
 ## Project status
